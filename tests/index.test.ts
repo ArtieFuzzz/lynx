@@ -8,7 +8,7 @@ export async function Get() {
 }
 
 export async function Post() {
-	const res = await request('https://jsonplaceholder.typicode.com/posts', 'POST')
+	const res = await request<TypicodePostsReponse>('https://jsonplaceholder.typicode.com/posts', 'POST')
 		.body({
 			title: 'hello world!',
 			body: 'foobar',
@@ -17,4 +17,10 @@ export async function Post() {
 		.send()
 
 	equal(typeof res.json,'object')
+}
+
+interface TypicodePostsReponse {
+	title: string,
+	body: string
+	userId: number
 }

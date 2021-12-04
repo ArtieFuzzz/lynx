@@ -5,7 +5,7 @@ import { URL } from 'url'
 import LynxResponse from './LynxReponse'
 import { SendTypes } from './types'
 
-class Lynx {
+class Lynx<T> {
 	private reqBody?: string | Record<string, unknown>
 	private url: URL
 	private method: string
@@ -53,7 +53,7 @@ class Lynx {
 		return this
 	}
 
-	public async send(): Promise<LynxResponse> {
+	public async send(): Promise<LynxResponse<T>> {
 		return new Promise((resolve, reject) => {
 			if (this.reqBody) {
 				if (!this.reqHeaders['Content-Length']) this.reqHeaders['Content-Length'] = Buffer.byteLength(this.reqBody.toString())
@@ -72,7 +72,7 @@ class Lynx {
 					res.on('error', (err) => reject(err))
 					res.on('data', (d) => this.data.push(d))
 					res.on('end', () => {
-						return resolve(new LynxResponse(this.data.toString()))
+						return resolve(new LynxResponse(this.data))
 					})
 				})
 
@@ -91,7 +91,7 @@ class Lynx {
 					res.on('error', (err) => reject(err))
 					res.on('data', (d) => this.data.push(d))
 					res.on('end', () => {
-						return resolve(new LynxResponse(this.data.toString()))
+						return resolve(new LynxResponse(this.data))
 					})
 				})
 
@@ -105,4 +105,4 @@ class Lynx {
 	}
 }
 
-export const request = (url: string, method = 'GET') => new Lynx(url, method)
+export const request = <T = unknown>(url: string, method = 'GET') => new Lynx<T>(url, method)
