@@ -1,0 +1,30 @@
+{
+	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
+	"extends": [
+		"config:base",
+		"group:allNonMajor",
+		"schedule:daily",
+		"docker:pinDigests"
+	],
+	"labels": [
+		"dependencies"
+	],
+	"assignees": [
+		"ArtieFuzzz"
+	],
+	"packageRules": [
+		{
+			"matchUpdateTypes": [
+				"minor",
+				"patch"
+			],
+			"matchCurrentVersion": "!/^0/",
+			"addLabels": [
+				"minor"
+			]
+		}
+	],
+	"lockFileMaintenance": {
+		"enabled": true
+	}
+}
