@@ -1,8 +1,15 @@
 {
   "name": "httpclient",
+  "version": "1.1.2",
+  "main": "build/index.js",
   "packageManager": "yarn@3.1.1",
+  "files": [
+    "build",
+    "!tsconfig.tsbuildinfo"
+  ],
   "scripts": {
-    "build": "tsc -p src"
+    "build": "tsc -p src",
+    "test": "tsc test.ts && node test.js"
   },
   "devDependencies": {
     "@astriel-division/ts-config": "^1.0.7",
