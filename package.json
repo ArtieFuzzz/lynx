@@ -1,6 +1,9 @@
 {
   "name": "httpclient",
   "packageManager": "yarn@3.1.1",
+  "scripts": {
+    "build": "tsc -p src"
+  },
   "devDependencies": {
     "@astriel-division/ts-config": "^1.0.7",
     "@types/node": "^16.11.11"
