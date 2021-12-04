@@ -1,6 +1,6 @@
 # @artiefuzzz/lynx
 
-> A lightweight HTTP client
+> Lightweight HTTP client
 
 ## Installation
 
