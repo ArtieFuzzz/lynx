@@ -1,5 +1,5 @@
 import request from './src/index'
 
 (async () => {
-	console.log(await (await request('https://jsonplaceholder.typicode.com/posts/1').send()).json)
+	console.log((await request('htts://rt-03.s3.ap-southeast-2.amazonaws.com/animals/2EPZuYEwkU.jpg').send()).buffer)
 })()
