@@ -1,5 +1,5 @@
 import { equal } from 'assert';
-import { request, SendAs } from '../src/index';
+import { Methods, request, SendAs } from '../src/index';
 
 export async function Get() {
 	console.time('Get')
@@ -11,7 +11,7 @@ export async function Get() {
 
 export async function Post() {
 	console.time('Post')
-	const res = await request<TypicodePostsReponse>('https://jsonplaceholder.typicode.com/posts', 'POST')
+	const res = await request<TypicodePostsReponse>('https://jsonplaceholder.typicode.com/posts', Methods.Post)
 		.body({
 			title: 'hello world!',
 			body: 'foobar',

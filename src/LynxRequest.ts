@@ -3,19 +3,20 @@ import * as http from 'http'
 import * as https from 'https'
 import { URL } from 'url'
 import * as zlib from 'zlib'
+import { Methods } from '.'
 import LynxResponse from './LynxReponse'
 import { SendAs } from './types'
 
 class Lynx<T> {
-	private compress: boolean
+	private compression: boolean
 	private reqBody?: string | Record<string, unknown>
 	private url: URL
 	private method: string
 	private userAgent: string
 	private data: Array<Buffer>
 	private reqHeaders: Record<string, string | number>
-	constructor(url: string, method = 'GET') {
-		this.compress = false
+	constructor(url: string, method = Methods.Get) {
+		this.compression = false
 		this.url = new URL(url)
 		this.method = method
 		this.userAgent = 'Lynx/v1'
@@ -26,8 +27,8 @@ class Lynx<T> {
 		}
 	}
 
-	public compression() {
-		this.compress = true
+	public compress() {
+		this.compression = true
 
 		return this
 	}
@@ -71,7 +72,7 @@ class Lynx<T> {
 			let req: ClientRequest
 
 			const Handler = (res: http.IncomingMessage) => {
-				if (this.compress) {
+				if (this.compression) {
 					if (res.headers['Content-Encoding'] === 'gzip') res.pipe(zlib.createGzip()) 
 					if (res.headers['Content-Encoding'] === 'deflate') res.pipe(zlib.createDeflate())
 				}
@@ -115,4 +116,4 @@ class Lynx<T> {
 	}
 }
 
-export const request = <T = unknown>(url: string, method = 'GET') => new Lynx<T>(url, method)
+export const request = <T = unknown>(url: string, method = Methods.Get) => new Lynx<T>(url, method)

@@ -5,6 +5,16 @@ __metadata:
   version: 5
   cacheKey: 8
 
+"@artiefuzzz/lynx@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "@artiefuzzz/lynx@workspace:."
+  dependencies:
+    "@astriel-division/ts-config": 1.0.7
+    "@types/node": 16.11.11
+    xv: 1.1.1
+  languageName: unknown
+  linkType: soft
+
 "@astriel-division/ts-config@npm:1.0.7":
   version: 1.0.7
   resolution: "@astriel-division/ts-config@npm:1.0.7"
@@ -21,16 +31,6 @@ __metadata:
   checksum: 1c472bd63f23ca0e4effc96e6e0c693b83b027f613a1f41b6d1bd7791f65ce171a351e0a5c92575cb59e84ad0a930875397bfbbb91a7c925ddbbb558f7461af8
   languageName: node
   linkType: hard
-
-"lynx@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "lynx@workspace:."
-  dependencies:
-    "@astriel-division/ts-config": 1.0.7
-    "@types/node": 16.11.11
-    xv: 1.1.1
-  languageName: unknown
-  linkType: soft
 
 "tslib@npm:2.3.1":
   version: 2.3.1
