@@ -4,7 +4,7 @@ import * as https from 'https'
 import { URL } from 'url'
 import * as zlib from 'zlib'
 import LynxResponse from './LynxReponse'
-import { SendTypes } from './types'
+import { SendAs } from './types'
 
 class Lynx<T> {
 	private compress: boolean
@@ -48,13 +48,13 @@ class Lynx<T> {
 		return this
 	}
 
-	public body(data: Record<string, string | number>, sendAs: SendTypes) {
-		if (sendAs === SendTypes.JSON) {
+	public body(data: Record<string, string | number>, sendAs: SendAs) {
+		if (sendAs === SendAs.JSON) {
 			this.reqHeaders['Content-Type'] = 'application/json'
 			this.reqBody = JSON.stringify(data)
 		}
 
-		if (sendAs === SendTypes.Buffer) {
+		if (sendAs === SendAs.Buffer) {
 			this.reqHeaders['Content-Type'] = 'application/octet-stream'
 			this.reqBody = data
 		}

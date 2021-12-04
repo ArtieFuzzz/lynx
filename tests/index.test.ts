@@ -1,5 +1,5 @@
 import { equal } from 'assert';
-import { request, SendTypes } from '../src/index';
+import { request, SendAs } from '../src/index';
 
 export async function Get() {
 	console.time('Get')
@@ -16,7 +16,7 @@ export async function Post() {
 			title: 'hello world!',
 			body: 'foobar',
 			userId: 101
-		}, SendTypes.JSON)
+		}, SendAs.JSON)
 		.send()
 
 	equal(typeof res.json,'object')
