@@ -1,6 +1,8 @@
 {
   "extends": "@astriel-division/ts-config",
   "compilerOptions": {
-    "outDir": "../build"
+    "outDir": "../build",
+    "declaration": true,
+    "declarationDir": "../build/types"
   }
 }
