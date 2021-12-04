@@ -15,7 +15,7 @@ yarn add @artiefuzzz/lynx
 
 ## Usage
 
-Note: Although we are using `import { fetch } from '@artiefuzzz/lynx'` it still is the same as using `const { fetch } = require('@artiefuzzz/lynx')`
+**Note**: Although we are using `import { fetch } from '@artiefuzzz/lynx'` it still is the same as using `const { fetch } = require('@artiefuzzz/lynx')`
 
 Simple `GET` request:
 
