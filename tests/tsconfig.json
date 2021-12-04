@@ -1,0 +1,7 @@
+{
+  "extends": "@astriel-division/ts-config",
+  "compilerOptions": {
+    "outDir": "./opt",
+  },
+  "include": ["*.test.ts"]
+}

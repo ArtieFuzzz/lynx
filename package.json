@@ -9,10 +9,11 @@
   ],
   "scripts": {
     "build": "tsc -p src",
-    "test": "tsc test.ts && node test.js"
+    "test": "tsc -p tests && xv tests"
   },
   "devDependencies": {
     "@astriel-division/ts-config": "^1.0.7",
-    "@types/node": "^16.11.11"
+    "@types/node": "^16.11.11",
+    "xv": "^1.1.1"
   }
 }

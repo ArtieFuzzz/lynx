@@ -28,6 +28,7 @@ __metadata:
   dependencies:
     "@astriel-division/ts-config": ^1.0.7
     "@types/node": ^16.11.11
+    xv: ^1.1.1
   languageName: unknown
   linkType: soft
 
@@ -55,5 +56,14 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: bd629ad0da4a15d79aaad56baf3ee7d96f6a181760d430ae77f8c5325df7bffd9edee57544a3970e3651e8b796fe03a5838a7eb39c6d46cc3866c0b23d36a0dd
+  languageName: node
+  linkType: hard
+
+"xv@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "xv@npm:1.1.1"
+  bin:
+    xv: lib/bin.js
+  checksum: c051eec0ba04384668d9ef80da4a603e458601492c73d66113e36005edffa00c49ea6af24a92a80698502a6c92dcc7210caf2c030ad6060323c1828d637b1e49
   languageName: node
   linkType: hard
