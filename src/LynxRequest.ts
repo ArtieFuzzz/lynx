@@ -2,10 +2,12 @@ import type { ClientRequest } from 'http'
 import * as http from 'http'
 import * as https from 'https'
 import { URL } from 'url'
+import * as zlib from 'zlib'
 import LynxResponse from './LynxReponse'
 import { SendTypes } from './types'
 
 class Lynx<T> {
+	private compress: boolean
 	private reqBody?: string | Record<string, unknown>
 	private url: URL
 	private method: string
@@ -13,6 +15,7 @@ class Lynx<T> {
 	private data: Array<Buffer>
 	private reqHeaders: Record<string, string | number>
 	constructor(url: string, method = 'GET') {
+		this.compress = false
 		this.url = new URL(url)
 		this.method = method
 		this.userAgent = 'Lynx/v1'
@@ -22,8 +25,14 @@ class Lynx<T> {
 			"User-Agent": this.userAgent
 		}
 	}
-	
-	public query (query: Record<string, string>) {
+
+	public compression() {
+		this.compress = true
+
+		return this
+	}
+
+	public query(query: Record<string, string>) {
 		Object.keys(query).forEach(key => {
 			this.url.searchParams.append(key, query[key])
 		})
@@ -31,7 +40,7 @@ class Lynx<T> {
 		return this
 	}
 
-	public headers (headers: Record<string, string>) {
+	public headers(headers: Record<string, string>) {
 		Object.keys(headers).forEach(key => {
 			Object.assign(this.reqHeaders, key)
 		})
@@ -39,7 +48,7 @@ class Lynx<T> {
 		return this
 	}
 
-	public body (data: Record<string, string | number>, sendAs: SendTypes) {
+	public body(data: Record<string, string | number>, sendAs: SendTypes) {
 		if (sendAs === SendTypes.JSON) {
 			this.reqHeaders['Content-Type'] = 'application/json'
 			this.reqBody = JSON.stringify(data)
@@ -58,9 +67,22 @@ class Lynx<T> {
 			if (this.reqBody) {
 				if (!this.reqHeaders['Content-Length']) this.reqHeaders['Content-Length'] = Buffer.byteLength(this.reqBody.toString())
 			}
+
 			let req: ClientRequest
 
-			if (this.url.protocol  === 'http:') {
+			const Handler = (res: http.IncomingMessage) => {
+				if (this.compress) {
+					if (res.headers['Content-Encoding'] === 'gzip') res.pipe(zlib.createGzip()) 
+					if (res.headers['Content-Encoding'] === 'deflate') res.pipe(zlib.createDeflate())
+				}
+				res.on('error', (err) => err)
+				res.on('data', (d) => this.data.push(d))
+				res.on('end', () => {
+					return resolve(new LynxResponse(this.data))
+				})
+			}
+
+			if (this.url.protocol === 'http:') {
 				req = http.request({
 					method: this.method,
 					hostname: this.url.hostname,
@@ -68,17 +90,7 @@ class Lynx<T> {
 					protocol: this.url.protocol,
 					path: this.url.pathname + this.url.search,
 					headers: this.reqHeaders
-				}, (res) => {
-					res.on('error', (err) => reject(err))
-					res.on('data', (d) => this.data.push(d))
-					res.on('end', () => {
-						return resolve(new LynxResponse(this.data))
-					})
-				})
-
-				if (this.reqBody) req.write(this.reqBody)
-
-				return req.end()
+				}, Handler)
 			} else if (this.url.protocol === 'https:') {
 				req = https.request({
 					method: this.method,
@@ -87,20 +99,18 @@ class Lynx<T> {
 					protocol: this.url.protocol,
 					path: this.url.pathname + this.url.search,
 					headers: this.reqHeaders
-				}, (res) => {
-					res.on('error', (err) => reject(err))
-					res.on('data', (d) => this.data.push(d))
-					res.on('end', () => {
-						return resolve(new LynxResponse(this.data))
-					})
-				})
-
-				if (this.reqBody) req.write(this.reqBody)
-
-				return req.end()
+				}, Handler)
 			} else {
-				throw Error('Invalid protocol')
+				throw Error('Protocol must be http:// or https://')
 			}
+
+			req.on('error', (err) => {
+				reject(err.message)
+			})
+
+			if (this.reqBody) req.write(this.reqBody)
+
+			return req.end()
 		})
 	}
 }
