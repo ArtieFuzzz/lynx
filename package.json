@@ -2,7 +2,7 @@
   "name": "@artiefuzzz/lynx",
   "description": "Lightweight HTTP client",
   "license": "MIT",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "main": "build/index.js",
   "types": "build/types/index.d.ts",
   "packageManager": "yarn@3.1.1",
@@ -18,5 +18,12 @@
     "@astriel-division/ts-config": "1.0.7",
     "@types/node": "16.11.11",
     "xv": "1.1.1"
-  }
+  },
+  "keywords": [
+    "http",
+    "https",
+    "request",
+    "fetch",
+    "lightweight"
+  ]
 }
