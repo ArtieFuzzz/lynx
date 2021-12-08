@@ -1,24 +1,26 @@
-import { Blob } from 'buffer'
+import type * as http from 'http'
 
 export default class LynxResponse<T> {
-	protected data: Array<Buffer>
-	constructor(data: Array<Buffer>) {
-		this.data = data
-	}
+  protected data!: Buffer
+  protected client: http.IncomingMessage
+  constructor(res: http.IncomingMessage) {
+    this.client = res
+  }
 
-	get json(): T {
-		return JSON.parse(this.data.toString())
-	}
+  pushChunck(chunk: Uint8Array[] | Buffer[]) {
+    const length = this.client.headers['content-length'] as string
+    this.data = Buffer.concat(chunk, length !== undefined ? Number(length) : undefined)
+  }
 
-	get text() {
-		return this.data.toString()
-	}
+  get json(): T {
+    return JSON.parse(this.data.toString('utf-8'))
+  }
 
-	get buffer() {
-		return Buffer.from(this.data.toString())
-	}
+  get text() {
+    return this.data.toString()
+  }
 
-	get blob() {
-		return new Blob(this.data)
-	}
+  get buffer() {
+    return Buffer.from(this.data.toString())
+  }
 }

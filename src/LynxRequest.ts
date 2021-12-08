@@ -13,14 +13,12 @@ class Lynx<T> {
 	private url: URL
 	private method: string
 	private userAgent: string
-	private data: Array<Buffer>
 	private reqHeaders: Record<string, string | number>
 	constructor(url: string, method = Methods.Get) {
 		this.compression = false
 		this.url = new URL(url)
 		this.method = method
 		this.userAgent = 'Lynx/v1'
-		this.data = []
 		this.reqBody = undefined
 		this.reqHeaders = {
 			"User-Agent": this.userAgent
@@ -72,14 +70,19 @@ class Lynx<T> {
 			let req: ClientRequest
 
 			const Handler = (res: http.IncomingMessage) => {
+				const data = new LynxResponse<T>(res)
+				const chunks: Buffer[] | Uint8Array[] = []
+
 				if (this.compression) {
-					if (res.headers['Content-Encoding'] === 'gzip') res.pipe(zlib.createGzip()) 
+					if (res.headers['Content-Encoding'] === 'gzip') res.pipe(zlib.createGzip())
 					if (res.headers['Content-Encoding'] === 'deflate') res.pipe(zlib.createDeflate())
 				}
 				res.on('error', (err) => err)
-				res.on('data', (d) => this.data.push(d))
+				res.on('data', (d) => chunks.push(d))
 				res.on('end', () => {
-					return resolve(new LynxResponse(this.data))
+					data.pushChunck(chunks)
+
+					return resolve(data)
 				})
 			}
 
