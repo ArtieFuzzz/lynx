@@ -2,7 +2,7 @@
   "name": "@artiefuzzz/lynx",
   "description": "Lightweight HTTP client",
   "license": "MIT",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "main": "build/index.js",
   "types": "build/types/index.d.ts",
   "packageManager": "yarn@3.1.1",
