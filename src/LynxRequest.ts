@@ -39,7 +39,7 @@ class Lynx<T> {
 		return this
 	}
 
-	public headers(headers: Record<string, string>) {
+	public headers(headers: Record<string, unknown>) {
 		Object.keys(headers).forEach(key => {
 			Object.assign(this.reqHeaders, key)
 		})

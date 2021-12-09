@@ -1,6 +1,6 @@
 import type * as http from 'http'
 
-export default class LynxResponse<T> {
+export default class LynxResponse<T = unknown> {
   protected data!: Buffer
   protected client: http.IncomingMessage
   constructor(res: http.IncomingMessage) {
@@ -17,10 +17,10 @@ export default class LynxResponse<T> {
   }
 
   get text() {
-    return this.data.toString()
+    return this.data.toString('utf-8')
   }
 
   get buffer() {
-    return Buffer.from(this.data.toString())
+    return this.data
   }
 }
