@@ -31,18 +31,42 @@ class Lynx<T> {
 		return this
 	}
 
-	public query(query: Record<string, string>) {
-		Object.keys(query).forEach(key => {
-			this.url.searchParams.append(key, query[key])
-		})
+	query(obj: { [K: string]: string }): this
+	query(name: string, value: any): this
+	public query(name: string | { [K: string]: string }, value?: string) {
+		if (typeof name === 'string') {
+			if (this.url.searchParams.has(name.toLowerCase())) return this
+
+			this.url.searchParams.append(name, value!)
+		} else if (isObject(name)) {
+			for (const [key, value] of Object.entries(name)) {
+				if (this.url.searchParams.has(key)) return this
+
+				return this.url.searchParams.append(key, value)
+			}
+		} else {
+			throw Error(`Expected query to be a string or object but instead got ${typeof name === 'object' ? 'array/null' : typeof name}`)
+		}
 
 		return this
 	}
 
-	public headers(headers: Record<string, unknown>) {
-		Object.keys(headers).forEach(key => {
-			Object.assign(this.reqHeaders, key)
-		})
+	headers(obj: { [K: string]: any }): this
+	headers(name: string, value: any): this
+	public headers(name: string | { [K: string]: any }, value?: any) {
+		if (typeof name === 'string') {
+			if (this.reqHeaders.hasOwnProperty(name.toLowerCase())) return this
+
+			this.reqHeaders[name.toLowerCase()] = value
+		} else if (isObject(name)) {
+			Object.keys(name).forEach(key => {
+				if (this.reqHeaders.hasOwnProperty(key.toLowerCase())) return this
+
+				return this.reqHeaders[name.toLowerCase()] = value;
+			})
+		} else {
+			throw Error(`Expected headers to be a string or object but instead got ${typeof name === 'object' ? 'array/null' : typeof name}`)
+		}
 
 		return this
 	}
@@ -117,6 +141,12 @@ class Lynx<T> {
 			return req.end()
 		})
 	}
+}
+
+function isObject(obj: any): boolean {
+	if (!Object.keys(obj).length) return false
+
+	return true
 }
 
 export const request = <T = unknown>(url: string, method = Methods.Get) => new Lynx<T>(url, method)
