@@ -16,7 +16,7 @@
   },
   "devDependencies": {
     "@astriel-division/ts-config": "1.0.7",
-    "@types/node": "16.11.11",
+    "@types/node": "16.11.12",
     "xv": "1.1.1"
   },
   "keywords": [
