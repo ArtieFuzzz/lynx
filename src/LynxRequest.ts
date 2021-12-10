@@ -34,7 +34,7 @@ class Lynx<T> {
 			this.url.searchParams.append(name, value!)
 		} else if (isObject(name)) {
 			for (const [key, value] of Object.entries(name)) {
-				if (this.url.searchParams.has(key)) return this
+				if (this.url.searchParams.has(key)) continue
 
 				return this.url.searchParams.append(key, value)
 			}
@@ -49,15 +49,15 @@ class Lynx<T> {
 	headers(name: string, value: any): this
 	public headers(name: string | { [K: string]: any }, value?: any) {
 		if (typeof name === 'string') {
-			if (this.reqHeaders.hasOwnProperty(name.toLowerCase())) return this
+			if (this.reqHeaders.hasOwnProperty(name)) return this
 
 			this.reqHeaders[name.toLowerCase()] = value
 		} else if (isObject(name)) {
-			Object.keys(name).forEach(key => {
-				if (this.reqHeaders.hasOwnProperty(key.toLowerCase())) return this
+			for (const [key, value] of Object.entries(name)) {
+				if (this.reqHeaders.hasOwnProperty(key)) continue;
 
-				return this.reqHeaders[name.toLowerCase()] = value;
-			})
+				this.reqHeaders[key] = value
+			}
 		} else {
 			throw Error(`Expected headers to be a string or object but instead got ${typeof name === 'object' ? 'array/null' : typeof name}`)
 		}
