@@ -1,7 +1,8 @@
+
 export default class LynxResponse<T = unknown> {
   protected data!: Buffer
   protected client: any
-  protected headers: Record<string, unknown | string[]>
+  protected headers: { [k: string]: any }
   public code: number
   constructor(client: any) {
     this.code = 0
@@ -15,17 +16,22 @@ export default class LynxResponse<T = unknown> {
   }
 
   parseHeaders(headers: string[]) {
-    for (const header of headers) {
-      let val = this.headers[header]
+    for (let i = 0; i < headers.length; i += 2) {
+      const key = headers[i]
+      const value = headers[i + 1] as unknown as Buffer
+
+      let val = this.headers[key]
 
       if (val !== undefined) {
         if (!Array.isArray(val)) {
           val = [val]
-          this.headers[header] = val
+          this.headers[key] = val
+
         }
-        (val as any[]).push(header);
+
+        val.push(headers[i])
       } else {
-        this.headers[header] = val;
+        this.headers[key] = value.toString('utf-8')
       }
     }
   }
