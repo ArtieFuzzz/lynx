@@ -11,7 +11,7 @@ __metadata:
   dependencies:
     "@artiefuzzz/utils": ^1.0.3
     "@astriel-division/ts-config": 1.0.7
-    "@types/node": ^16.11.12
+    "@types/node": 16.11.12
     undici: ^4.11.3
     xv: 1.1.1
   languageName: unknown
@@ -34,7 +34,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^16.11.12":
+"@types/node@npm:16.11.12":
   version: 16.11.12
   resolution: "@types/node@npm:16.11.12"
   checksum: a3feb346d61a56f5a137c29bb8c63cfa3cc02e184b9dffdc18ef1528dcce55596e570575215a2e39e6ce69343eeb2a5ba71c271938f1dc8db4cc393902855412
