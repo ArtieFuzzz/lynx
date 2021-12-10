@@ -9,11 +9,20 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@artiefuzzz/lynx@workspace:."
   dependencies:
+    "@artiefuzzz/utils": ^1.0.3
     "@astriel-division/ts-config": 1.0.7
     "@types/node": 16.11.12
+    undici: ^4.11.3
     xv: 1.1.1
   languageName: unknown
   linkType: soft
+
+"@artiefuzzz/utils@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "@artiefuzzz/utils@npm:1.0.3"
+  checksum: c87f1e82c36bab2cbe69663c4ecebedb655efbba5d5d0a803305bd124ade05d5c20b111d2b5fef8b7e286e39d16d58175d68a61001f5e0e2098866d8daee4dbb
+  languageName: node
+  linkType: hard
 
 "@astriel-division/ts-config@npm:1.0.7":
   version: 1.0.7
@@ -56,6 +65,13 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: bd629ad0da4a15d79aaad56baf3ee7d96f6a181760d430ae77f8c5325df7bffd9edee57544a3970e3651e8b796fe03a5838a7eb39c6d46cc3866c0b23d36a0dd
+  languageName: node
+  linkType: hard
+
+"undici@npm:^4.11.3":
+  version: 4.11.3
+  resolution: "undici@npm:4.11.3"
+  checksum: 1e783f2d2b54813a9a1b0edbc8ddcc0790c29451be2dae25940b57d882e5303b4ba822479c9e12d405b67fafc4b23988676616765aafdc362c97f3a82488f614
   languageName: node
   linkType: hard
 
