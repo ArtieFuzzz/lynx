@@ -1,34 +1,28 @@
-import type { ClientRequest } from 'http'
-import * as http from 'http'
-import * as https from 'https'
+import { isObject } from '@artiefuzzz/utils'
+import { Client, Dispatcher } from 'undici'
 import { URL } from 'url'
-import * as zlib from 'zlib'
-import { Methods } from '.'
 import LynxResponse from './LynxReponse'
 import { SendAs } from './types'
 
 class Lynx<T> {
-	private compression: boolean
 	private reqBody?: string | Record<string, unknown>
 	private url: URL
-	private method: string
 	private userAgent: string
 	private reqHeaders: Record<string, string | number>
-	constructor(url: string, method = Methods.Get) {
-		this.compression = false
+	private coreOptions: Dispatcher.RequestOptions
+	private client: Client
+	constructor(url: string, method: Dispatcher.HttpMethod) {
 		this.url = new URL(url)
-		this.method = method
 		this.userAgent = 'Lynx/v1'
 		this.reqBody = undefined
 		this.reqHeaders = {
 			"User-Agent": this.userAgent
 		}
-	}
-
-	public compress() {
-		this.compression = true
-
-		return this
+		this.coreOptions = {
+			method,
+			path: this.url.pathname + this.url.searchParams
+		}
+		this.client = new Client(this.url.origin)
 	}
 
 	query(obj: { [K: string]: string }): this
@@ -91,62 +85,37 @@ class Lynx<T> {
 				if (!this.reqHeaders['Content-Length']) this.reqHeaders['Content-Length'] = Buffer.byteLength(this.reqBody.toString())
 			}
 
-			let req: ClientRequest
+			const res = new LynxResponse<T>(this.client)
+			const data: Uint8Array[] | Buffer[] = []
 
-			const Handler = (res: http.IncomingMessage) => {
-				const data = new LynxResponse<T>(res)
-				const chunks: Buffer[] | Uint8Array[] = []
+			this.client.dispatch(this.coreOptions, {
+				onData(chunk) {
+					data.push(chunk)
 
-				if (this.compression) {
-					if (res.headers['Content-Encoding'] === 'gzip') res.pipe(zlib.createGzip())
-					if (res.headers['Content-Encoding'] === 'deflate') res.pipe(zlib.createDeflate())
-				}
-				res.on('error', (err) => err)
-				res.on('data', (d) => chunks.push(d))
-				res.on('end', () => {
-					data.pushChunck(chunks)
+					return true
+				},
+				onError(err) {
+					return reject(err)
+				},
+				onHeaders(status, headers, resume) {
+					res.code = status
+					res.parseHeaders(headers ?? [])
+					resume()
 
-					return resolve(data)
-				})
-			}
+					return true
+				},
+				onComplete: () => {
+					this.client.close()
 
-			if (this.url.protocol === 'http:') {
-				req = http.request({
-					method: this.method,
-					hostname: this.url.hostname,
-					port: this.url.port,
-					protocol: this.url.protocol,
-					path: this.url.pathname + this.url.search,
-					headers: this.reqHeaders
-				}, Handler)
-			} else if (this.url.protocol === 'https:') {
-				req = https.request({
-					method: this.method,
-					hostname: this.url.hostname,
-					port: this.url.port,
-					protocol: this.url.protocol,
-					path: this.url.pathname + this.url.search,
-					headers: this.reqHeaders
-				}, Handler)
-			} else {
-				throw Error('Protocol must be http:// or https://')
-			}
+					res.pushChunck(data)
 
-			req.on('error', (err) => {
-				reject(err.message)
+					return resolve(res)
+				},
+				onConnect: () => null,
+				onUpgrade: () => null
 			})
-
-			if (this.reqBody) req.write(this.reqBody)
-
-			return req.end()
 		})
 	}
 }
 
-function isObject(obj: any): boolean {
-	if (!Object.keys(obj).length) return false
-
-	return true
-}
-
-export const request = <T = unknown>(url: string, method = Methods.Get) => new Lynx<T>(url, method)
+export const request = <T = unknown>(url: string, method: Dispatcher.HttpMethod = 'GET') => new Lynx<T>(url, method)

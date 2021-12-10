@@ -1,15 +1,33 @@
-import type * as http from 'http'
-
 export default class LynxResponse<T = unknown> {
   protected data!: Buffer
-  protected client: http.IncomingMessage
-  constructor(res: http.IncomingMessage) {
-    this.client = res
+  protected client: any
+  protected headers: Record<string, unknown | string[]>
+  public code: number
+  constructor(client: any) {
+    this.code = 0
+    this.client = client
+    this.headers = {}
   }
 
   pushChunck(chunk: Uint8Array[] | Buffer[]) {
-    const length = this.client.headers['content-length'] as string
+    const length = this.headers['content-length'] as string
     this.data = Buffer.concat(chunk, length !== undefined ? Number(length) : undefined)
+  }
+
+  parseHeaders(headers: string[]) {
+    for (const header of headers) {
+      let val = this.headers[header]
+
+      if (val !== undefined) {
+        if (!Array.isArray(val)) {
+          val = [val]
+          this.headers[header] = val
+        }
+        (val as any[]).push(header);
+      } else {
+        this.headers[header] = val;
+      }
+    }
   }
 
   get json(): T {

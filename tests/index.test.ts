@@ -19,7 +19,7 @@ export async function Post() {
 		}, SendAs.JSON)
 		.send()
 
-	equal(typeof res.json,'object')
+	equal(typeof res.json, 'object')
 	console.timeEnd('Post')
 }
 
