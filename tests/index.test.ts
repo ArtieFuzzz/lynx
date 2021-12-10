@@ -1,6 +1,6 @@
 import { StopWatch } from '@artiefuzzz/utils';
 import { equal } from 'assert';
-import { Methods, request, SendAs } from '../src/index';
+import { request, SendAs } from '../src/index';
 
 export async function Get() {
 	const watch = new StopWatch(2)
@@ -14,7 +14,7 @@ export async function Get() {
 export async function Post() {
 	const watch = new StopWatch(2)
 
-	const res = await request<TypicodePostsReponse>('https://jsonplaceholder.typicode.com/posts', Methods.Post)
+	const res = await request<TypicodePostsReponse>('https://jsonplaceholder.typicode.com/posts', 'POST')
 		.body({
 			title: 'hello world!',
 			body: 'foobar',
