@@ -3,6 +3,7 @@
   "compilerOptions": {
     "outDir": "../build",
     "declaration": true,
-    "declarationDir": "../build/types"
+    "declarationDir": "../build/types",
+    "resolveJsonModule": true
   }
 }

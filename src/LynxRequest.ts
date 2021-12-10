@@ -1,6 +1,7 @@
 import { isObject } from '@artiefuzzz/utils'
 import { Client, Dispatcher } from 'undici'
 import { URL } from 'url'
+import pkg from '../package.json'
 import LynxResponse from './LynxReponse'
 import { SendAs } from './types'
 
@@ -13,10 +14,10 @@ class Lynx<T> {
 	private client: Client
 	constructor(url: string, method: Dispatcher.HttpMethod) {
 		this.url = new URL(url)
-		this.userAgent = 'Lynx/v1'
+		this.userAgent = `${pkg.name}/${pkg.version}`
 		this.reqBody = undefined
 		this.reqHeaders = {
-			"User-Agent": this.userAgent
+			'User-Agent': this.userAgent
 		}
 		this.coreOptions = {
 			method,
@@ -75,6 +76,12 @@ class Lynx<T> {
 			this.reqHeaders['Content-Type'] = 'application/octet-stream'
 			this.reqBody = data
 		}
+
+		return this
+	}
+
+	public agent(ua: string) {
+		this.userAgent = ua
 
 		return this
 	}
