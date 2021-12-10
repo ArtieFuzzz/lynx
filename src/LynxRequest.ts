@@ -1,9 +1,10 @@
 import { isObject } from '@artiefuzzz/utils'
 import { Client, Dispatcher } from 'undici'
 import { URL } from 'url'
-import pkg from '../package.json'
 import LynxResponse from './LynxReponse'
 import { SendAs } from './types'
+
+const { version } = require('../package.json')
 
 class Lynx<T> {
 	private reqBody?: string | Record<string, unknown>
@@ -14,10 +15,10 @@ class Lynx<T> {
 	private client: Client
 	constructor(url: string, method: Dispatcher.HttpMethod) {
 		this.url = new URL(url)
-		this.userAgent = `${pkg.name}/${pkg.version}`
+		this.userAgent = `@artiefuzzz/lynx (v${version}, https://github.com/ArtieFuzzz/Lynx)`
 		this.reqBody = undefined
 		this.reqHeaders = {
-			'User-Agent': this.userAgent
+			'user-agent': this.userAgent
 		}
 		this.coreOptions = {
 			method,
@@ -57,7 +58,7 @@ class Lynx<T> {
 			for (const [key, value] of Object.entries(name)) {
 				if (this.reqHeaders.hasOwnProperty(key)) continue;
 
-				this.reqHeaders[key] = value
+				this.reqHeaders[key.toLowerCase()] = value
 			}
 		} else {
 			throw Error(`Expected headers to be a string or object but instead got ${typeof name === 'object' ? 'array/null' : typeof name}`)
@@ -89,7 +90,7 @@ class Lynx<T> {
 	public async send(): Promise<LynxResponse<T>> {
 		return new Promise((resolve, reject) => {
 			if (this.reqBody) {
-				if (!this.reqHeaders['Content-Length']) this.reqHeaders['Content-Length'] = Buffer.byteLength(this.reqBody.toString())
+				if (!this.reqHeaders['content-length']) this.reqHeaders['content-length'] = Buffer.byteLength(this.reqBody.toString())
 			}
 
 			const res = new LynxResponse<T>(this.client)
