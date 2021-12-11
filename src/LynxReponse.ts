@@ -1,10 +1,11 @@
+import type { Client } from "undici"
 
 export default class LynxResponse<T = unknown> {
   protected data!: Buffer
   protected client: any
   protected headers: { [k: string]: any }
   public code: number
-  constructor(client: any) {
+  constructor(client: Client) {
     this.code = 0
     this.client = client
     this.headers = {}
@@ -12,7 +13,7 @@ export default class LynxResponse<T = unknown> {
 
   pushChunck(chunk: Uint8Array[] | Buffer[]) {
     const length = this.headers['content-length'] as string
-    this.data = Buffer.concat(chunk, length !== undefined ? Number(length) : undefined)
+    return this.data = Buffer.concat(chunk, length !== undefined ? Number(length) : undefined)
   }
 
   parseHeaders(headers: string[]) {
@@ -26,7 +27,6 @@ export default class LynxResponse<T = unknown> {
         if (!Array.isArray(val)) {
           val = [val]
           this.headers[key] = val
-
         }
 
         val.push(headers[i])

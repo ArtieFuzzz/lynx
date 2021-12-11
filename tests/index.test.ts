@@ -18,7 +18,7 @@ export async function Post() {
 		.body({
 			title: 'hello world!',
 			body: 'foobar',
-			userId: 101
+			userId: 1
 		}, SendAs.JSON)
 		.send()
 

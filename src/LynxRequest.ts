@@ -7,26 +7,21 @@ import { SendAs } from './types'
 const { version } = require('../package.json')
 
 class Lynx<T> {
-	private reqBody?: string | Record<string, unknown>
+	private reqBody?: string | Record<string, unknown> | unknown[] | Buffer
 	private url: URL
 	private userAgent: string
 	private reqHeaders: Record<string, any>
-	private coreOptions: Dispatcher.RequestOptions
 	private client: Client
+	private method: Dispatcher.HttpMethod
 	constructor(url: string, method: Dispatcher.HttpMethod) {
+		this.method = method
+		this.reqBody = undefined
 		this.url = new URL(url)
 		this.userAgent = `@artiefuzzz/lynx (v${version}, https://github.com/ArtieFuzzz/Lynx)`
-		this.reqBody = undefined
+		this.client = new Client(this.url.origin)
 		this.reqHeaders = {
 			'user-agent': this.userAgent
 		}
-		this.coreOptions = {
-			method,
-			path: this.url.pathname + this.url.search,
-			body: this.reqBody,
-			headers: this.reqHeaders
-		}
-		this.client = new Client(this.url.origin)
 	}
 
 	query(obj: { [K: string]: string }): this
@@ -69,10 +64,10 @@ class Lynx<T> {
 		return this
 	}
 
-	public body(data: Record<string, string | number>, sendAs: SendAs) {
+	public body(data: Record<string, any> | Buffer, sendAs: SendAs) {
 		if (sendAs === SendAs.JSON) {
 			if (!this.reqHeaders.hasOwnProperty('content-type')) this.headers('content-type', 'application/json')
-			this.reqBody = JSON.stringify(data)
+			this.reqBody = data
 		}
 
 		if (sendAs === SendAs.Buffer) {
@@ -91,13 +86,19 @@ class Lynx<T> {
 
 	public async send(): Promise<LynxResponse<T>> {
 		return new Promise((resolve, reject) => {
+			const options: Dispatcher.RequestOptions = {
+				method: this.method,
+				path: this.url.pathname + this.url.search,
+				headers: this.reqHeaders,
+				body: this.reqBody instanceof Buffer ? this.reqBody : typeof this.reqBody === 'object' ? JSON.stringify(this.reqBody) : this.reqBody
+			}
+
 			const res = new LynxResponse<T>(this.client)
 			const data: Uint8Array[] | Buffer[] = []
 
-			this.client.dispatch(this.coreOptions, {
+			this.client.dispatch(options, {
 				onData(chunk) {
 					data.push(chunk)
-
 					return true
 				},
 				onError(err) {
