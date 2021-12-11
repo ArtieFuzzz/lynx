@@ -1,7 +1,7 @@
 # @artiefuzzz/lynx
 
 > Lightweight HTTP client
-> Inspired by [`@augu/orchid](https://npmjs.com/@augu/orchid) and [`centra`](https://npmjs.com/centra)
+> Inspired by [`@augu/orchid`](https://npmjs.com/@augu/orchid) and [`centra`](https://npmjs.com/centra)
 
 ## Installation
 
