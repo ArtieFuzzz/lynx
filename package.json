@@ -2,13 +2,14 @@
   "name": "@artiefuzzz/lynx",
   "description": "Lightweight HTTP client",
   "license": "MIT",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "main": "build/index.js",
-  "types": "build/types/index.d.ts",
+  "types": "build/index.d.ts",
   "packageManager": "yarn@3.1.1",
   "files": [
     "build",
-    "!build/tsconfig.tsbuildinfo"
+    "!build/tsconfig.tsbuildinfo",
+    "index.d.ts"
   ],
   "scripts": {
     "build": "tsc -p src",
