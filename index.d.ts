@@ -10,29 +10,23 @@ declare namespace Lynx {
 		private client
 		private method
 		constructor(url: string, method: Dispatcher.HttpMethod)
-		query(obj: {
-			[K: string]: string
-		}): this
-		query(name: string, value: any): this
-		headers(obj: {
-			[K: string]: any
-		}): this
-		headers(name: string, value: any): this
-		body(data: Record<string, any> | Buffer, sendAs: SendAs): this
-		agent(ua: string): this
-		send(): Promise<LynxResponse<T>>
+		public query(obj: { [K: string]: string }): this
+		public query(name: string, value: any): this
+		public headers(obj: { [K: string]: any }): this
+		public headers(name: string, value: any): this
+		public body(data: Record<string, any> | Buffer, sendAs: SendAs): this
+		public agent(ua: string): this
+		public send(): Promise<LynxResponse<T>>
 	}
 
 	class LynxResponse<T = unknown> {
 		protected data: Buffer
 		protected client: any
-		protected headers: {
-			[k: string]: any
-		}
-		code: number
+		protected headers: { [k: string]: any }
+		public code: number
 		constructor(client: Client)
-		pushChunck(chunk: Uint8Array[] | Buffer[]): Buffer
-		parseHeaders(headers: string[]): void
+		public pushChunck(chunk: Uint8Array[] | Buffer[]): Buffer
+		public parseHeaders(headers: string[]): void
 		get json(): T
 		get text(): string
 		get buffer(): Buffer

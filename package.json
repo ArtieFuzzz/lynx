@@ -20,7 +20,7 @@
     "undici": "^4.11.3"
   },
   "devDependencies": {
-    "@astriel-division/ts-config": "1.0.7",
+    "@artiefuzzz/ts": "^1.0.0",
     "@types/node": "16.11.12",
     "xv": "1.1.1"
   },
