@@ -4,6 +4,6 @@
     "target": "ES2019",
     "outDir": "../build"
   },
-  "include": ["."],
+  "include": [".", "../index.d.ts"],
   "exclude": []
 }

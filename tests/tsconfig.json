@@ -1,7 +1,9 @@
 {
-  "extends": "@astriel-division/ts-config",
+  "extends": "@artiefuzzz/ts",
   "compilerOptions": {
-    "outDir": "./opt",
+    "target": "ES2019",
+    "outDir": "opt"
   },
-  "include": ["*.test.ts"]
+  "include": ["."],
+  "exclude": []
 }

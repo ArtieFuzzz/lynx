@@ -1,5 +1,10 @@
 import type { Client, Dispatcher } from 'undici'
-import type { SendAs } from './src/types'
+
+declare const enum SendAs {
+	JSON = 'json',
+	Buffer = 'buffer',
+	Form = 'form'
+}
 
 declare namespace Lynx {
 	class LynxRequest<T> {
@@ -33,7 +38,7 @@ declare namespace Lynx {
 	}
 }
 
-declare const request: <T = unknown>(url: string, method?: Dispatcher.HttpMethod) => Lynx.LynxResponse<T>
+declare const request: <T = unknown>(url: string, method?: Dispatcher.HttpMethod) => Lynx.LynxRequest<T>
 
-export = request
+export { request, SendAs }
 export as namespace Lynx
