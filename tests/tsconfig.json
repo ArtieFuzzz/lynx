@@ -2,7 +2,8 @@
   "extends": "@artiefuzzz/ts",
   "compilerOptions": {
     "target": "ES2019",
-    "outDir": "opt"
+    "outDir": "opt",
+    "resolveJsonModule": true
   },
   "include": [".", "../package.json"],
   "exclude": []
