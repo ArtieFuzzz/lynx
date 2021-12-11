@@ -10,7 +10,7 @@ class Lynx<T> {
 	private reqBody?: string | Record<string, unknown>
 	private url: URL
 	private userAgent: string
-	private reqHeaders: Record<string, string | number>
+	private reqHeaders: Record<string, any>
 	private coreOptions: Dispatcher.RequestOptions
 	private client: Client
 	constructor(url: string, method: Dispatcher.HttpMethod) {
@@ -22,7 +22,9 @@ class Lynx<T> {
 		}
 		this.coreOptions = {
 			method,
-			path: this.url.pathname + this.url.searchParams
+			path: this.url.pathname + this.url.search,
+			body: this.reqBody,
+			headers: this.reqHeaders
 		}
 		this.client = new Client(this.url.origin)
 	}
@@ -69,12 +71,12 @@ class Lynx<T> {
 
 	public body(data: Record<string, string | number>, sendAs: SendAs) {
 		if (sendAs === SendAs.JSON) {
-			this.reqHeaders['Content-Type'] = 'application/json'
+			if (!this.reqHeaders.hasOwnProperty('content-type')) this.headers('content-type', 'application/json')
 			this.reqBody = JSON.stringify(data)
 		}
 
 		if (sendAs === SendAs.Buffer) {
-			this.reqHeaders['Content-Type'] = 'application/octet-stream'
+			if (!this.reqHeaders.hasOwnProperty('content-type')) this.headers('content-type', 'application/octet-stream')
 			this.reqBody = data
 		}
 
@@ -89,10 +91,6 @@ class Lynx<T> {
 
 	public async send(): Promise<LynxResponse<T>> {
 		return new Promise((resolve, reject) => {
-			if (this.reqBody) {
-				if (!this.reqHeaders['content-length']) this.reqHeaders['content-length'] = Buffer.byteLength(this.reqBody.toString())
-			}
-
 			const res = new LynxResponse<T>(this.client)
 			const data: Uint8Array[] | Buffer[] = []
 
