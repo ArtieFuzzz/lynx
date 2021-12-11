@@ -4,6 +4,6 @@
     "target": "ES2019",
     "outDir": "opt"
   },
-  "include": ["."],
+  "include": [".", "../package.json"],
   "exclude": []
 }
