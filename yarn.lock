@@ -9,7 +9,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@artiefuzzz/lynx@workspace:."
   dependencies:
-    "@artiefuzzz/ts": ^1.1.1
+    "@artiefuzzz/ts": 1.1.1
     "@artiefuzzz/utils": ^1.0.3
     "@types/node": 16.11.12
     undici: ^4.11.3
@@ -17,7 +17,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@artiefuzzz/ts@npm:^1.1.1":
+"@artiefuzzz/ts@npm:1.1.1":
   version: 1.1.1
   resolution: "@artiefuzzz/ts@npm:1.1.1"
   checksum: 54dc0f332e1e630402552541b9804b924954b92203bf9c389efdb3bb92cf8495a9fa22c99cf425c395e90f2ae627f500cf1fff224037ed3a41be7a7e5783fef1
