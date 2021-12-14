@@ -9,18 +9,18 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@artiefuzzz/lynx@workspace:."
   dependencies:
-    "@artiefuzzz/ts": 1.1.1
+    "@artiefuzzz/ts": 1.1.2
     "@artiefuzzz/utils": ^1.0.3
-    "@types/node": 16.11.12
+    "@types/node": 16.11.13
     undici: ^4.11.3
     xv: 1.1.1
   languageName: unknown
   linkType: soft
 
-"@artiefuzzz/ts@npm:1.1.1":
-  version: 1.1.1
-  resolution: "@artiefuzzz/ts@npm:1.1.1"
-  checksum: 54dc0f332e1e630402552541b9804b924954b92203bf9c389efdb3bb92cf8495a9fa22c99cf425c395e90f2ae627f500cf1fff224037ed3a41be7a7e5783fef1
+"@artiefuzzz/ts@npm:1.1.2":
+  version: 1.1.2
+  resolution: "@artiefuzzz/ts@npm:1.1.2"
+  checksum: d29c668fb8c5cd78ea99e30e6f35fcba05d8c1fc6fce9106cfaac799fe052d79224329deacadb9efbfc910cff53f8ca3fcc85743f4d9f9b3931768ba41e7fa73
   languageName: node
   linkType: hard
 
@@ -31,10 +31,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:16.11.12":
-  version: 16.11.12
-  resolution: "@types/node@npm:16.11.12"
-  checksum: a3feb346d61a56f5a137c29bb8c63cfa3cc02e184b9dffdc18ef1528dcce55596e570575215a2e39e6ce69343eeb2a5ba71c271938f1dc8db4cc393902855412
+"@types/node@npm:16.11.13":
+  version: 16.11.13
+  resolution: "@types/node@npm:16.11.13"
+  checksum: 7c9d62c024537d7c9f2229097b9e7a93a60bc60efbc9171977f172819e229b01d0b6ed276d335996d39b0096aed2cefa58c4a34b264d712ae3595449e8d96ab7
   languageName: node
   linkType: hard
 
