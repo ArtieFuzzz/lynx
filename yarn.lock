@@ -25,9 +25,9 @@ __metadata:
   linkType: hard
 
 "@artiefuzzz/utils@npm:^1.0.3":
-  version: 1.0.3
-  resolution: "@artiefuzzz/utils@npm:1.0.3"
-  checksum: c87f1e82c36bab2cbe69663c4ecebedb655efbba5d5d0a803305bd124ade05d5c20b111d2b5fef8b7e286e39d16d58175d68a61001f5e0e2098866d8daee4dbb
+  version: 1.1.0
+  resolution: "@artiefuzzz/utils@npm:1.1.0"
+  checksum: 8407a568d074d853f7dce93952e1841082456ee85ad2ea886b598709d1b01fc46af5ba042d96e1eab29964c6a3a024fb5fec2319859b763c216b41d8eb210f42
   languageName: node
   linkType: hard
 
@@ -39,9 +39,9 @@ __metadata:
   linkType: hard
 
 "undici@npm:^4.11.3":
-  version: 4.11.3
-  resolution: "undici@npm:4.11.3"
-  checksum: 1e783f2d2b54813a9a1b0edbc8ddcc0790c29451be2dae25940b57d882e5303b4ba822479c9e12d405b67fafc4b23988676616765aafdc362c97f3a82488f614
+  version: 4.12.0
+  resolution: "undici@npm:4.12.0"
+  checksum: 30acabeb037c04abbb6e76ddfc6f1925a19a91652665c58e9de818b374de7ede2cd39d6a3d9c2e50e77b9029e52ff9db3dfd7be2bf5a20e507f6ae3e3e97219e
   languageName: node
   linkType: hard
 
