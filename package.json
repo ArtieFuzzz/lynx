@@ -16,7 +16,7 @@
     "test": "tsc -p tests && xv tests"
   },
   "dependencies": {
-    "@artiefuzzz/utils": "^1.0.3",
+    "@artiefuzzz/utils": "^1.2.1",
     "undici": "^4.11.3"
   },
   "devDependencies": {

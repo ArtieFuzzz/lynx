@@ -10,7 +10,7 @@ __metadata:
   resolution: "@artiefuzzz/lynx@workspace:."
   dependencies:
     "@artiefuzzz/ts": 1.1.2
-    "@artiefuzzz/utils": ^1.0.3
+    "@artiefuzzz/utils": ^1.2.1
     "@types/node": 16.11.17
     undici: ^4.11.3
     xv: 1.1.1
@@ -24,10 +24,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@artiefuzzz/utils@npm:^1.0.3":
-  version: 1.1.0
-  resolution: "@artiefuzzz/utils@npm:1.1.0"
-  checksum: 8407a568d074d853f7dce93952e1841082456ee85ad2ea886b598709d1b01fc46af5ba042d96e1eab29964c6a3a024fb5fec2319859b763c216b41d8eb210f42
+"@artiefuzzz/utils@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "@artiefuzzz/utils@npm:1.2.1"
+  checksum: 57735ecc475869fa6d7d490bb2a561476c5538377b802123aae4c134dbab6ffa1911ee00e0d2772880ff5013f84aab7a86dc9603c9f4183b042332a223fc3cfc
   languageName: node
   linkType: hard
 
