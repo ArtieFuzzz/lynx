@@ -1,3 +1,3 @@
-export * from './LynxRequest'
+export * from './lib/LynxRequest'
 export * from './types'
 
