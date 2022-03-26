@@ -9,7 +9,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@artiefuzzz/lynx@workspace:."
   dependencies:
-    "@artiefuzzz/ts": 1.1.2
+    "@artiefuzzz/ts": 1.3.2
     "@artiefuzzz/utils": ^1.2.1
     "@types/node": 16.11.26
     undici: ^4.11.3
@@ -17,10 +17,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@artiefuzzz/ts@npm:1.1.2":
-  version: 1.1.2
-  resolution: "@artiefuzzz/ts@npm:1.1.2"
-  checksum: d29c668fb8c5cd78ea99e30e6f35fcba05d8c1fc6fce9106cfaac799fe052d79224329deacadb9efbfc910cff53f8ca3fcc85743f4d9f9b3931768ba41e7fa73
+"@artiefuzzz/ts@npm:1.3.2":
+  version: 1.3.2
+  resolution: "@artiefuzzz/ts@npm:1.3.2"
+  dependencies:
+    tslib: ^2.3.1
+  checksum: 6331ec7f65198ea5df36596a3bd3f24d32560df9147b8837dbd776448bb5c7bc19bdd3f8b96e2917e07ddf150d7deb89eab003718ab42aec5f7e022908699d9b
   languageName: node
   linkType: hard
 
@@ -35,6 +37,13 @@ __metadata:
   version: 16.11.26
   resolution: "@types/node@npm:16.11.26"
   checksum: 57757caaba3f0d95de82198cb276a1002c49b710108c932a1d02d7c91ff2fa57cfe2dd19fde60853b6dd90b0964b3cf35557981d2628e20aed6a909057aedfe6
+  languageName: node
+  linkType: hard
+
+"tslib@npm:^2.3.1":
+  version: 2.3.1
+  resolution: "tslib@npm:2.3.1"
+  checksum: de17a98d4614481f7fcb5cd53ffc1aaf8654313be0291e1bfaee4b4bb31a20494b7d218ff2e15017883e8ea9626599b3b0e0229c18383ba9dce89da2adf15cb9
   languageName: node
   linkType: hard
 

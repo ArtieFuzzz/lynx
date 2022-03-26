@@ -20,7 +20,7 @@
     "undici": "^4.11.3"
   },
   "devDependencies": {
-    "@artiefuzzz/ts": "1.1.2",
+    "@artiefuzzz/ts": "1.3.2",
     "@types/node": "16.11.26",
     "xv": "1.1.1"
   },
