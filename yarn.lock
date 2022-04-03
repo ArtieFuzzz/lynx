@@ -12,7 +12,7 @@ __metadata:
     "@artiefuzzz/ts": 1.3.2
     "@artiefuzzz/utils": ^1.2.1
     "@types/node": 16.11.26
-    undici: ^4.11.3
+    undici: ^5.0.0
     xv: 1.1.1
   languageName: unknown
   linkType: soft
@@ -47,10 +47,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"undici@npm:^4.11.3":
-  version: 4.12.1
-  resolution: "undici@npm:4.12.1"
-  checksum: 969ea481ec57ac19a6a642497a84fe492baaf18dcfd885ea41f09e438ae71445c79ffd7756a7927cbe819eb7b7073bf1e3d53acf497e98f685621c4e92997fbd
+"undici@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "undici@npm:5.0.0"
+  checksum: 98bb9914aa0647840ce6fd518ac828b7760df8d9b747680d11260fcb4f50af0029b0513e5600bf0d3a812d9e3f8d9d787bbcbcee7b9e75aa5f7de6f9b0212898
   languageName: node
   linkType: hard
 
