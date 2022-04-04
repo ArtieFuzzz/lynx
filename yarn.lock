@@ -27,9 +27,9 @@ __metadata:
   linkType: hard
 
 "@artiefuzzz/utils@npm:^1.2.1":
-  version: 1.2.1
-  resolution: "@artiefuzzz/utils@npm:1.2.1"
-  checksum: 57735ecc475869fa6d7d490bb2a561476c5538377b802123aae4c134dbab6ffa1911ee00e0d2772880ff5013f84aab7a86dc9603c9f4183b042332a223fc3cfc
+  version: 1.2.4
+  resolution: "@artiefuzzz/utils@npm:1.2.4"
+  checksum: be1c0691093d874486381da3d92177676827c3e35c5cca0aa5c2ba7f05ed5384a57e7dea392fb455ec46a57bd799507a2f40c0ce3118f7415d9a789e38924efa
   languageName: node
   linkType: hard
 
