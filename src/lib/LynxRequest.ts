@@ -2,7 +2,7 @@ import { isObject } from '@artiefuzzz/utils'
 import { Client, Dispatcher } from 'undici'
 import { URL } from 'url'
 import { SendAs } from '../types'
-import LynxResponse from './LynxReponse'
+import LynxResponse from './LynxResponse'
 
 const { version } = require('../../package.json')
 
