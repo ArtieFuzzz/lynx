@@ -17,10 +17,10 @@
   },
   "dependencies": {
     "@artiefuzzz/utils": "^1.2.1",
-    "undici": "^4.11.3"
+    "undici": "^5.0.0"
   },
   "devDependencies": {
-    "@artiefuzzz/ts": "1.1.2",
+    "@artiefuzzz/ts": "1.3.2",
     "@types/node": "16.11.26",
     "xv": "1.1.1"
   },
