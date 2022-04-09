@@ -19,9 +19,7 @@ class Lynx<T> {
     this.url = new URL(url)
     this.userAgent = `@artiefuzzz/lynx (v${version}, https://github.com/ArtieFuzzz/Lynx)`
     this.client = new Client(this.url.origin)
-    this.reqHeaders = {
-      'user-agent': this.userAgent
-    }
+    this.reqHeaders = {}
   }
 
   query(obj: { [K: string]: string }): this
@@ -86,6 +84,8 @@ class Lynx<T> {
 
   public async send(): Promise<LynxResponse<T>> {
     return new Promise((resolve, reject) => {
+      this.headers('User-Agent', this.userAgent)
+      
       const options: Dispatcher.RequestOptions = {
         method: this.method,
         path: this.url.pathname + this.url.search,
