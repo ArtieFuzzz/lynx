@@ -1,9 +1,11 @@
 {
   "extends": "@artiefuzzz/ts",
   "compilerOptions": {
-    "target": "ES2019",
-    "outDir": "../build"
+    "target": "ES2020",
+    "outDir": "../build",
+    "declaration": true,
+    "declarationDir": "../build/@types"
   },
-  "include": [".", "../index.d.ts"],
+  "include": ["."],
   "exclude": []
 }
