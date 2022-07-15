@@ -2,7 +2,7 @@ import { StatusCode } from '../types'
 
 export default class LynxResponse<T = unknown> {
   private data!: Buffer
-  private headers: { [k: string]: any }
+  public headers: { [k: string]: any }
   public code: StatusCode
   constructor() {
     this.code = 0

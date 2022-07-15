@@ -144,7 +144,7 @@ export class LynxClient<T = unknown> {
     })
   }
 
-  private middlewareResponse(res: LynxResponse<T>) {
+  private middlewareResponse(res: LynxResponse<T>): boolean {
     if (this.middleware.length >= 1) {
       for (const middleware of this.middleware) {
         middleware.onResponse(this, res)
