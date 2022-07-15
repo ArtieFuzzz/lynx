@@ -1,6 +1,28 @@
-import { StopWatch } from '@artiefuzzz/utils';
-import { equal } from 'assert';
-import { request, SendAs } from '../src/index';
+import { StopWatch } from '@artiefuzzz/utils'
+import { equal } from 'assert/strict'
+import { IMiddleware, request, SendAs, StatusCode } from '../src/index'
+
+const helloware: IMiddleware = {
+  name: 'hello',
+  onResponse(_client, res) {
+    if (res.code === StatusCode.OK) {
+      console.log('OK')
+      
+      return
+    }
+    return
+  }
+}
+
+export async function Middleware() {
+  const watch = new StopWatch(2)
+  await request('http://httparrot.heroku.com/get')
+    .use(helloware)
+    .agent('Lynx HTTP Client Test (github.com/ArtieFuzzz/lynx)')
+    .send()
+
+  console.log(`Middleware: ${watch.stop()}`)
+}
 
 export async function UserAgent() {
   const watch = new StopWatch(2);
@@ -9,7 +31,7 @@ export async function UserAgent() {
     .send()
   const res = _res.json
 
-  equal(res.headers['user-agent'], 'Lynx HTTP Client Test (github.com/ArtieFuzzz/lynx)')
+  equal(res?.headers['user-agent'], 'Lynx HTTP Client Test (github.com/ArtieFuzzz/lynx)')
 
   console.log(`User Agent: ${watch.stop()}`)
 }
@@ -21,7 +43,7 @@ export async function Headers() {
     .send()
   const res = _res.json
 
-  equal(res.headers['lynx'], 'true')
+  equal(res?.headers['lynx'], 'true')
 
   console.log(`Headers: ${watch.stop()}`)
 }
@@ -52,17 +74,14 @@ export async function Post() {
 }
 
 export interface HttparrotGetReponse {
-  args: Args;
-  headers: { [key: string]: string };
-  url: string;
-  origin: string;
-}
-
-export interface Args {
+  args: unknown
+  headers: { [key: string]: string }
+  url: string
+  origin: string
 }
 
 interface TypicodePostsReponse {
-  title: string,
+  title: string
   body: string
   userId: number
 }

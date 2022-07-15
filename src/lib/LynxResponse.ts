@@ -1,22 +1,20 @@
-import type { Client } from "undici"
+import { StatusCode } from '../types'
 
 export default class LynxResponse<T = unknown> {
-  protected data!: Buffer
-  protected client: any
-  protected headers: { [k: string]: any }
-  public code: number
-  constructor(client: Client) {
+  private data!: Buffer
+  private headers: { [k: string]: any }
+  public code: StatusCode
+  constructor() {
     this.code = 0
-    this.client = client
     this.headers = {}
   }
 
-  pushChunck(chunk: Uint8Array[] | Buffer[]) {
+  public pushChunk(chunk: Uint8Array[] | Buffer[]) {
     const length = this.headers['content-length'] as string
     return this.data = Buffer.concat(chunk, length !== undefined ? Number(length) : undefined)
   }
 
-  parseHeaders(headers: string[]) {
+  public parseHeaders(headers: string[]) {
     for (let i = 0; i < headers.length; i += 2) {
       const key = headers[i]
       const value = headers[i + 1] as unknown as Buffer
@@ -36,15 +34,34 @@ export default class LynxResponse<T = unknown> {
     }
   }
 
-  get json(): T {
+  /**
+   * Returns the Response in JSON.
+   * If the response code is 204 it will return an null.
+   */
+  get json(): T | null {
+    if (this.code === StatusCode.NO_CONTENT) {
+      return null
+    }
+
     return JSON.parse(this.data.toString('utf-8'))
   }
 
+  /**
+   * Returns the Response in Text. (utf-8)
+   */
   get text() {
+    if (this.code === StatusCode.NO_CONTENT) {
+      return null
+    }
+
     return this.data.toString('utf-8')
   }
 
+  /**
+   * Returns the body as a Buffer. (Raw data)
+   * This will enable you to serialize data yourself.
+   */
   get buffer() {
-    return this.data
+    return this.data ?? null
   }
 }

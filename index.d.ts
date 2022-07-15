@@ -1,4 +1,4 @@
-import type { Client, Dispatcher } from 'undici'
+import type { Dispatcher } from 'undici'
 
 declare const enum SendAs {
 	JSON = 'json',
@@ -7,7 +7,7 @@ declare const enum SendAs {
 }
 
 declare namespace Lynx {
-	class LynxRequest<T> {
+  export class LynxClient<T> {
 		private reqBody?
 		private url
 		private userAgent
@@ -24,14 +24,13 @@ declare namespace Lynx {
 		public send(): Promise<LynxResponse<T>>
 	}
 
-	class LynxResponse<T = unknown> {
+	export class LynxResponse<T = unknown> {
 		protected data: Buffer
-		protected client: any
 		protected headers: { [k: string]: any }
 		public code: number
-		constructor(client: Client)
-		public pushChunck(chunk: Uint8Array[] | Buffer[]): Buffer
-		public parseHeaders(headers: string[]): void
+		constructor()
+		// public pushChunk(chunk: Uint8Array[] | Buffer[]): Buffer
+		// public parseHeaders(headers: string[]): void
 		get json(): T
 		get text(): string
 		get buffer(): Buffer
@@ -39,6 +38,13 @@ declare namespace Lynx {
 }
 
 declare const request: <T = unknown>(url: string, method?: Dispatcher.HttpMethod) => Lynx.LynxRequest<T>
+
+export interface IMiddleware {
+  readonly name: string
+  init?(): void
+  onResponse<T>(client: Lynx.LynxClient<T>, res: LynxResponse<T>): void
+  onFinish?(): void
+}
 
 export { request, SendAs }
 export as namespace Lynx
