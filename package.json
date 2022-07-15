@@ -5,7 +5,7 @@
   "version": "2.5.3",
   "main": "build/index.js",
   "types": "index.d.ts",
-  "packageManager": "yarn@3.2.0",
+  "packageManager": "yarn@3.2.1",
   "files": [
     "build",
     "!build/tsconfig.tsbuildinfo",
@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "@artiefuzzz/ts": "1.3.2",
-    "@types/node": "16.11.26",
+    "@types/node": "16.11.36",
     "xv": "1.1.1"
   },
   "repository": {
