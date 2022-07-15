@@ -26,7 +26,7 @@ export async function Middleware() {
 
 export async function UserAgent() {
   const watch = new StopWatch(2);
-  const _res = await request<HttparrotGetReponse>('https://httparrot.herokuapp.com/get')
+  const _res = await request<HttparrotGetResponse>('https://httparrot.herokuapp.com/get')
     .agent('Lynx HTTP Client Test (github.com/ArtieFuzzz/lynx)')
     .send()
   const res = _res.json
@@ -38,7 +38,7 @@ export async function UserAgent() {
 
 export async function Headers() {
   const watch = new StopWatch(2);
-  const _res = await request<HttparrotGetReponse>('https://httparrot.herokuapp.com/get')
+  const _res = await request<HttparrotGetResponse>('https://httparrot.herokuapp.com/get')
     .headers('lynx', true)
     .send()
   const res = _res.json
@@ -60,7 +60,7 @@ export async function Get() {
 export async function Post() {
   const watch = new StopWatch(2)
 
-  const res = await request<TypicodePostsReponse>('https://jsonplaceholder.typicode.com/posts', 'POST')
+  const res = await request<TypicodePostsResponse>('https://jsonplaceholder.typicode.com/posts', 'POST')
     .body({
       title: 'hello world!',
       body: 'foobar',
@@ -73,14 +73,14 @@ export async function Post() {
 
 }
 
-export interface HttparrotGetReponse {
+export interface HttparrotGetResponse {
   args: unknown
   headers: { [key: string]: string }
   url: string
   origin: string
 }
 
-interface TypicodePostsReponse {
+interface TypicodePostsResponse {
   title: string
   body: string
   userId: number
