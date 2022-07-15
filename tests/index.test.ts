@@ -16,7 +16,7 @@ const helloware: IMiddleware = {
 
 export async function Middleware() {
   const watch = new StopWatch(2)
-  await request('http://httparrot.heroku.com/get')
+  await request('https://httparrot.heroku.com/get')
     .use(helloware)
     .agent('Lynx HTTP Client Test (github.com/ArtieFuzzz/lynx)')
     .send()
