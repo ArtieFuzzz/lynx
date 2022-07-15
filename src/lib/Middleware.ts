@@ -1,5 +1,5 @@
-import { LynxClient } from './LynxRequest'
-import LynxResponse from './LynxResponse'
+import type { LynxClient } from './LynxRequest'
+import type LynxResponse from './LynxResponse'
 
 export interface IMiddleware {
   readonly name: string

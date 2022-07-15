@@ -3,7 +3,7 @@ import { Client, Dispatcher } from 'undici'
 import { URL } from 'url'
 import { SendAs } from '../types'
 import LynxResponse from './LynxResponse'
-import { IMiddleware } from './Middleware'
+import type { IMiddleware } from './Middleware'
 
 const { version } = require('../../package.json')
 
