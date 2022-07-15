@@ -70,7 +70,6 @@ export async function Post() {
 
   equal(typeof res.json, 'object')
   console.log(`Post: ${watch.stop()}`)
-
 }
 
 export interface HttparrotGetResponse {

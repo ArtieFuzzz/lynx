@@ -24,8 +24,6 @@ export class LynxClient<T = unknown> {
     this.userAgent = `@artiefuzzz/lynx (v${version}, https://github.com/ArtieFuzzz/Lynx)`
     this.client = new Client(this.url.origin)
     this.reqHeaders = {}
-
-    this.initMiddleware()
   }
 
   public get middlewares(): string[] {
@@ -37,6 +35,7 @@ export class LynxClient<T = unknown> {
       throw Error('Middleware must have a name.')
     }
 
+    middleware.init?.()
     this.middleware.push(middleware)
     return this
   }
@@ -161,18 +160,6 @@ export class LynxClient<T = unknown> {
     if (this.middleware.length >= 1) {
       for (const middleware of this.middleware) {
         middleware.onFinish?.()
-      }
-      
-      return true
-    }
-
-    return false
-  }
-
-  private initMiddleware(): boolean {
-    if (this.middleware.length >= 1) {
-      for (const middleware of this.middleware) {
-        middleware.init?.()
       }
       
       return true
