@@ -28,6 +28,10 @@ export class LynxClient<T = unknown> {
     this.initMiddleware()
   }
 
+  public get middlewares(): string[] {
+    return this.middleware.map(m => m.name)
+  }
+
   public use(middleware: IMiddleware): this {
     if (!middleware.name) {
       throw Error('Middleware must have a name.')
