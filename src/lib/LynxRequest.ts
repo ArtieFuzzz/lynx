@@ -52,7 +52,7 @@ export class LynxClient<T = unknown> {
       for (const [key, value] of Object.entries(name)) {
         if (this.url.searchParams.has(key)) continue
 
-        return this.url.searchParams.append(key, value)
+        this.url.searchParams.append(key, value)
       }
     } else {
       throw Error(`Expected query to be a string or object but instead got ${typeof name === 'object' ? 'array/null' : typeof name}`)
