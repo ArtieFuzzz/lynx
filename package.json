@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@artiefuzzz/utils": "^1.2.1",
-    "undici": "^5.0.0"
+    "undici": "^6.0.0"
   },
   "devDependencies": {
     "@artiefuzzz/ts": "1.3.2",
