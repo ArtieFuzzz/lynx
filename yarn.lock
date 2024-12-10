@@ -13,7 +13,7 @@ __metadata:
     "@artiefuzzz/utils": ^1.2.1
     "@types/node": 16.11.65
     undici: ^5.0.0
-    xv: 1.1.1
+    xv: 2.1.1
   languageName: unknown
   linkType: soft
 
@@ -54,11 +54,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"xv@npm:1.1.1":
-  version: 1.1.1
-  resolution: "xv@npm:1.1.1"
+"xv@npm:2.1.1":
+  version: 2.1.1
+  resolution: "xv@npm:2.1.1"
   bin:
     xv: lib/bin.js
-  checksum: c051eec0ba04384668d9ef80da4a603e458601492c73d66113e36005edffa00c49ea6af24a92a80698502a6c92dcc7210caf2c030ad6060323c1828d637b1e49
+  checksum: 8b8f8a7de443548c701bdaa167697f4f8d076ff05a270c5e69bb1c819c77b2a378122a094dc7b29b61e27abcd67e2d4697c6ea92429629b3a0bbb25b12d885df
   languageName: node
   linkType: hard
