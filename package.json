@@ -5,7 +5,7 @@
   "version": "2.5.6",
   "main": "build/index.js",
   "types": "./build/@types/index.d.ts",
-  "packageManager": "yarn@3.2.4",
+  "packageManager": "yarn@3.8.7",
   "files": [
     "build",
     "!build/tsconfig.tsbuildinfo",
@@ -20,8 +20,8 @@
     "undici": "^5.0.0"
   },
   "devDependencies": {
-    "@artiefuzzz/ts": "1.3.2",
-    "@types/node": "16.11.65",
+    "@artiefuzzz/ts": "1.4.0",
+    "@types/node": "16.18.126",
     "xv": "1.1.1"
   },
   "repository": {
